@@ -7,7 +7,7 @@ using System.Transactions;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class PessoasFisicasController : Controller
+    public class PessoasFisicasController : System.Web.Mvc.Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

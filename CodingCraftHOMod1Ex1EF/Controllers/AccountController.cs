@@ -13,7 +13,7 @@ using CodingCraftHOMod1Ex1EF.Models;
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : System.Web.Mvc.Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

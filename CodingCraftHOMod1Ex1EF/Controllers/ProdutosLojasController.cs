@@ -9,7 +9,7 @@ using CodingCraftHOMod1Ex1EF.ViewModels.ProdutosLojas;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class ProdutosLojasController : Controller
+    public class ProdutosLojasController : System.Web.Mvc.Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class ContatoController : Controller
+    public class ContatoController : System.Web.Mvc.Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Contato

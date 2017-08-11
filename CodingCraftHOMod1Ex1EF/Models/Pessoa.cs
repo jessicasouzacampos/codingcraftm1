@@ -10,18 +10,13 @@ namespace CodingCraftHOMod1Ex1EF.Models
         public virtual Cliente Cliente { get; set; }
         public virtual Fornecedor Fornecedor { get; set; }
 
-        public DateTime? DataUltimaModificacao { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string UsuarioUltimaModificacao { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime DataCriacao { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string UsuarioCriacao { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        //[DisplayName("Termo de Pesquisa")]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        //public String TermoPesquisa
-        //{
-        //    get { return UserName + ", " + Email; }
-        //    private set { }
-        //}
-
+        [DisplayName("Data da Última Modificação")]
+        public DateTime? DataUltimaModificacao { get; set; }
+        [DisplayName("Usuário da Última Modificação")]
+        public string UsuarioUltimaModificacao { get; set; }
+        [DisplayName("Data de Criação")]
+        public DateTime DataCriacao { get; set; }
+        [DisplayName("Usuário de Criação")]
+        public string UsuarioCriacao { get; set; }
     }
 }

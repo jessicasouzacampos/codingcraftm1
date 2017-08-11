@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : System.Web.Mvc.Controller
     {
         public ActionResult Index()
         {

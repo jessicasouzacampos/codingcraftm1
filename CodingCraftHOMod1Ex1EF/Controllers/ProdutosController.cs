@@ -5,23 +5,78 @@ using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.Models;
 using System.Transactions;
 using System.Linq;
+using System;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class ProdutosController : Controller    {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-        public ActionResult Pesquisar(string filtro)
-        {
-            var lista = db.Produtos.Where(s => s.Nome.Contains(filtro)).ToList();
-            return View(lista);
-        }
-
+    public class ProdutosController : Controller
+    {
         // GET: Produtos
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(ProdutoPesquisaViewModel viewModel)
         {
             var produtos = db.Produtos.Include(p => p.Categoria);
-            return View(await produtos.ToListAsync());
+
+            if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
+            {
+                produtos = produtos.Where(s => s.Nome.Contains(viewModel.TermoPesquisa) || s.Valor.ToString().Contains(viewModel.TermoPesquisa));
+            }
+
+            if (!String.IsNullOrEmpty(viewModel.UsuarioCriacao))
+            {
+                produtos = produtos.Where(s => s.UsuarioCriacao.Contains(viewModel.UsuarioCriacao));
+            }
+
+            if (!String.IsNullOrEmpty(viewModel.UsuarioUltimaModificacao))
+            {
+                produtos = produtos.Where(s => s.UsuarioUltimaModificacao.Contains(viewModel.UsuarioUltimaModificacao));
+            }
+
+            if (viewModel.CategoriaId != null)
+            {
+                produtos = produtos.Where(s => s.CategoriaId == viewModel.CategoriaId);
+            }
+
+            if (viewModel.ValorInicial != null)
+            {
+                if (viewModel.ValorFinal != null)
+                {
+                    produtos = produtos.Where(s => s.Valor >= viewModel.ValorInicial && s.Valor <= viewModel.ValorFinal);
+                } else
+                {
+                    produtos = produtos.Where(s => s.Valor == viewModel.ValorInicial);
+                }
+            }
+
+            if (viewModel.DataCriacaoInicial != null)
+            {
+                if (viewModel.DataCriacaoFinal != null)
+                {
+                    produtos = produtos.Where(s => s.DataCriacao >= viewModel.DataCriacaoInicial && s.DataCriacao <= viewModel.DataCriacaoFinal);
+                }
+                else
+                {
+                    produtos = produtos.Where(s => s.DataCriacao == viewModel.DataCriacaoInicial);
+                }
+            }
+
+            if (viewModel.DataUltimaModificacaoInicial != null)
+            {
+                if (viewModel.DataUltimaModificacaoFinal != null)
+                {
+                    produtos = produtos.Where(s => s.DataUltimaModificacao >= viewModel.DataUltimaModificacaoInicial && 
+                        s.DataUltimaModificacao <= viewModel.DataUltimaModificacaoFinal);
+                }
+                else
+                {
+                    produtos = produtos.Where(s => s.DataUltimaModificacao == viewModel.DataUltimaModificacaoInicial);
+                }
+            }
+
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.CategoriaId);
+            viewModel.Resultados = await produtos.ToListAsync();
+
+            return View(viewModel);
         }
 
         // GET: Produtos/Details/5

@@ -11,7 +11,7 @@ using CodingCraftHOMod1Ex1EF.Models;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class ClientesController : Controller
+    public class ClientesController : System.Web.Mvc.Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

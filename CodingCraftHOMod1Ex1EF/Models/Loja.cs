@@ -12,7 +12,7 @@ namespace CodingCraftHOMod1Ex1EF.Models
 
         [Required]
         [StringLength(100)]
-        [Index("IUQ_Lojas_Nome")]
+        [Index("IUQ_Lojas_Nome", IsUnique = true)]
         public String Nome { get; set; }
 
         public virtual ICollection<ProdutoLoja> LojaProdutos { get; set; }

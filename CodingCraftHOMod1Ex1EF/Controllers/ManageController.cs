@@ -11,7 +11,7 @@ using CodingCraftHOMod1Ex1EF.Models;
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : System.Web.Mvc.Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

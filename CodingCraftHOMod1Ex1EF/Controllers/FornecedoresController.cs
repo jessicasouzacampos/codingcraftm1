@@ -13,8 +13,6 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     public class FornecedoresController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Fornecedores
         public async Task<ActionResult> Index()
         {

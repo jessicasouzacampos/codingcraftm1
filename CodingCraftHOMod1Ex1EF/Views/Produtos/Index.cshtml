@@ -1,10 +1,14 @@
-﻿@model IEnumerable<CodingCraftHOMod1Ex1EF.Models.Produto>
+﻿@model CodingCraftHOMod1Ex1EF.ViewModels.ProdutoPesquisaViewModel
+@using CodingCraftHOMod1Ex1EF.Models
 
 @{
     ViewBag.Title = "Index";
+    var modeloColunas = new Produto();
 }
 
 <h2>Index</h2>
+
+@Html.Partial("_Pesquisa", Model)
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,34 +17,35 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria)
+            @Html.DisplayNameFor(_ => modeloColunas.Categoria)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.DisplayNameFor(_ => modeloColunas.Nome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Valor)
+            @Html.DisplayNameFor(_ => modeloColunas.Valor)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Valor)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProdutoId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProdutoId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProdutoId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Resultados)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProdutoId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProdutoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProdutoId })
+            </td>
+        </tr>
+    }
 
 </table>
