@@ -4,6 +4,9 @@ using System.Net;
 using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.Models;
 using System.Transactions;
+using System.Linq;
+using System.Collections.Generic;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -11,10 +14,50 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+       
         // GET: Lojas
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(ProdutosPorLojaViewModel viewModel)
         {
-            return View(await db.Lojas.ToListAsync());
+            var loja = db.Lojas.Include(p => p.LojaProdutos.Select(o => o.Produto));
+            List<ProdutosViewModel> produtos = new List<ProdutosViewModel>();
+
+            if (viewModel.LojaId != null)
+            {
+               loja = loja.Where(s => s.LojaId == viewModel.LojaId);
+
+                foreach (var item in loja.First().LojaProdutos)
+                {
+                    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade));
+                }
+            }         
+
+            ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.LojaId);
+            viewModel.Resultados = produtos;
+
+            return View(viewModel);
+        }
+
+        // GET: Lojas
+        public async Task<ActionResult> Index2(ProdutosPorLojaViewModel viewModel)
+        {
+            var loja = db.Lojas.Include(p => p.LojaProdutos.Select(o => o.Produto).GroupBy(ol => ol.CategoriaId));
+
+            List<ProdutosViewModel> produtos = new List<ProdutosViewModel>();
+
+            if (viewModel.LojaId != null)
+            {
+                loja = loja.Where(s => s.LojaId == viewModel.LojaId);
+
+                foreach (var item in loja.First().LojaProdutos)
+                {
+                    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade));
+                }
+            }
+
+            ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.LojaId);
+            viewModel.Resultados = produtos;
+
+            return View(viewModel);
         }
 
         // GET: Lojas/Details/5

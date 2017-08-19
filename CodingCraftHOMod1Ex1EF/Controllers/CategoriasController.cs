@@ -4,6 +4,9 @@ using System.Net;
 using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.Models;
 using System.Transactions;
+using CodingCraftHOMod1Ex1EF.ViewModels;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -12,9 +15,45 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categorias
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.Categorias.ToListAsync());
+        public async Task<ActionResult> Index(LojasPorCategoriaViewModel viewModel)
+        {             
+            List<LojasViewModel> lojas = new List<LojasViewModel>();
+
+            if (viewModel.CategoriaId != null)
+            {
+                var produtos = db.Produtos
+                .Include(o => o.Categoria)
+                .Include(o => o.ProdutoLojas.Select(b => b.Loja)).ToList();
+
+                produtos = produtos.Where(s => s.CategoriaId == viewModel.CategoriaId).ToList();
+
+               
+                var resultado = produtos.GroupBy(x => new {x.ProdutoLojas}).Select(r => r.Key.ProdutoLojas);
+                   
+                foreach (var item in resultado)
+                {
+                    var resultado2 = item.GroupBy(x => new { x.Loja, x.Quantidade})
+                        .Select(c => new {
+                            Quantidade = c.Sum(o => o.Quantidade),
+                            NomeLoja = c.Key.Loja.Nome,
+                            LojaID = c.Key.Loja.LojaId,
+                        });
+
+                    foreach (var item2 in resultado2)
+                    {
+                        lojas.Add(new LojasViewModel(item2.LojaID, item2.NomeLoja, item2.Quantidade));
+                    }
+
+                }
+
+                var tet = lojas.GroupBy(o => o.LojaId);         
+
+            }
+
+
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.CategoriaId);
+            viewModel.Resultados = lojas;
+            return View(viewModel);
         }
 
         // GET: Categorias/Details/5

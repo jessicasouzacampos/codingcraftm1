@@ -1,10 +1,14 @@
-﻿@model IEnumerable<CodingCraftHOMod1Ex1EF.Models.Cliente>
+﻿@model CodingCraftHOMod1Ex1EF.ViewModels.PessoasPorDadosBasicosViewModel
+@using CodingCraftHOMod1Ex1EF.Models
 
 @{
     ViewBag.Title = "Index";
+    var modeloColunas = new Pessoa();
 }
 
 <h2>Index</h2>
+
+@Html.Partial("_Pesquisa", Model)
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,20 +16,20 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Pessoa.UserName)
+            @Html.DisplayName("Nome")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Resultados) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Pessoa.UserName)
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PessoaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PessoaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PessoaId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

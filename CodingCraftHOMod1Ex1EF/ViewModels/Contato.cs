@@ -1,10 +1,6 @@
 ﻿using CodingCraftHOMod1Ex1EF.Atributos;
 using CodingCraftHOMod1Ex1EF.Models.Enum;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace CodingCraftHOMod1Ex1EF.ViewModels
 {

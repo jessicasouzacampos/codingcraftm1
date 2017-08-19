@@ -1,7 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CodingCraftHOMod1Ex1EF.ViewModels;
+using System.ComponentModel;
 
 namespace CodingCraftHOMod1Ex1EF.Models
 {
@@ -10,6 +11,24 @@ namespace CodingCraftHOMod1Ex1EF.Models
         [Required]
         [StringLength(14)]
         [Index("IUQ_PessoasFisicas_Cpf")]
-        public String Cpf { get; set; }        
+        public String Cpf { get; set; }
+
+        [DisplayName("Termo de Pesquisa")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public String TermoPesquisa
+        {
+            get { return UserName + ", " + Cpf; }
+        }
+
+        public PessoaFisica()
+        {
+
+        }
+
+        public PessoaFisica(String cpf, String id, String nome, String email, String telefone) 
+            : base(id, nome, email, telefone)
+        {
+            Cpf = cpf;
+        }
     }
 }

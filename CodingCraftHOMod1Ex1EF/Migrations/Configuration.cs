@@ -1,9 +1,6 @@
 namespace CodingCraftHOMod1Ex1EF.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<CodingCraftHOMod1Ex1EF.Models.ApplicationDbContext>
     {

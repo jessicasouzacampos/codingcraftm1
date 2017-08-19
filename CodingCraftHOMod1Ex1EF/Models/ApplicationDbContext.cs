@@ -6,6 +6,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 
 namespace CodingCraftHOMod1Ex1EF.Models
 {
@@ -99,6 +100,7 @@ namespace CodingCraftHOMod1Ex1EF.Models
             }
         }
 
+       
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<ProdutoLoja> ProdutosLojas { get; set; }
@@ -109,6 +111,10 @@ namespace CodingCraftHOMod1Ex1EF.Models
 
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Fornecedor> Fornecedores { get; set; }      
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+
+        public DbSet<Compra> Compras { get; set; }
+
+        public DbSet<Pessoa> Pessoas { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.Models;
 using System.Transactions;
 using System.Linq;
-using CodingCraftHOMod1Ex1EF.ViewModels.ProdutosLojas;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -16,10 +16,8 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         //TODO Como faz
         public ActionResult Pesquisar(string filtro)
         {
-            ProdutosPorLoja ProdutosPorLoja = new ProdutosPorLoja();
-            ProdutosPorLoja.Lojas = db.Lojas.Include(o=>o.LojaProdutos.Select(p =>p.Produto)).Where(s => s.Nome.Contains(filtro)).ToList();
-
-
+            ProdutosPorLojaViewModel ProdutosPorLoja = new ProdutosPorLojaViewModel();
+           
             var lista = db.Lojas.Where(s => s.Nome.Contains(filtro)).ToList();
             return View(lista);
         }

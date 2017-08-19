@@ -230,6 +230,7 @@
     <Compile Include="Atributos\CnpjAttribute.cs" />
     <Compile Include="Atributos\CpfAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\Controller`1.cs" />
     <Compile Include="Controllers\CategoriasController.cs" />
@@ -242,7 +243,6 @@
     <Compile Include="Controllers\PessoasJuridicasController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Controllers\ProdutosLojasController.cs" />
-    <Compile Include="Controllers\ContatoController.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -252,7 +252,7 @@
     <Compile Include="Mappers\ViewModelToModel .cs" />
     <Compile Include="Mappers\ModelToViewModel.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Compra.cs" />
@@ -271,16 +271,16 @@
     <Compile Include="Models\Interfaces\IEntidade.cs" />
     <Compile Include="Models\Interfaces\IEntidadeNaoEditavel.cs" />
     <Compile Include="Models\Loja.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\ProdutoLoja.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Contato.cs" />
+    <Compile Include="ViewModels\PessoasViewModel.cs" />
     <Compile Include="ViewModels\EntidadeNaoEditavelViewModel.cs" />
     <Compile Include="ViewModels\EntidadeViewModel.cs" />
     <Compile Include="ViewModels\ProdutoPesquisaViewModel.cs" />
-    <Compile Include="ViewModels\ProdutosLojas\ProdutosPorLoja.cs" />
+    <Compile Include="ViewModels\ProdutosPorLojaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -376,7 +376,6 @@
     <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Edit.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
-    <Content Include="Views\Produtos\Pesquisar.cshtml" />
     <Content Include="Views\PessoasFisicas\Create.cshtml" />
     <Content Include="Views\PessoasFisicas\Delete.cshtml" />
     <Content Include="Views\PessoasFisicas\Details.cshtml" />
@@ -397,16 +396,23 @@
     <Content Include="Views\Fornecedores\Details.cshtml" />
     <Content Include="Views\Fornecedores\Edit.cshtml" />
     <Content Include="Views\Fornecedores\Index.cshtml" />
-    <Content Include="Views\Contato\Index.cshtml" />
-    <Content Include="Views\Contato\Create.cshtml" />
     <Content Include="Views\PessoasJuridicas\Pesquisar.cshtml" />
     <Content Include="Views\PessoasFisicas\Pesquisar.cshtml" />
-    <Content Include="Views\ProdutosLojas\Pesquisar.cshtml" />
-    <Content Include="Views\Lojas\Pesquisar.cshtml" />
     <Content Include="Views\Fornecedores\Pesquisar.cshtml" />
-    <Content Include="Views\Clientes\Pesquisar.cshtml" />
-    <Content Include="Views\Categorias\Pesquisar.cshtml" />
     <Content Include="Views\Produtos\_Pesquisa.cshtml" />
+    <Content Include="Views\Lojas\_Pesquisa.cshtml" />
+    <Content Include="Views\Compras\Create.cshtml" />
+    <Content Include="Views\Compras\Delete.cshtml" />
+    <Content Include="Views\Compras\Details.cshtml" />
+    <Content Include="Views\Compras\Edit.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\Categorias\_Pesquisa.cshtml" />
+    <Content Include="Views\Pessoas\Create.cshtml" />
+    <Content Include="Views\Pessoas\Delete.cshtml" />
+    <Content Include="Views\Pessoas\Details.cshtml" />
+    <Content Include="Views\Pessoas\Edit.cshtml" />
+    <Content Include="Views\Pessoas\Index.cshtml" />
+    <Content Include="Views\Clientes\_Pesquisa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

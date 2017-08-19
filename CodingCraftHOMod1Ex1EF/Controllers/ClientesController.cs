@@ -1,25 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.ViewModels;
+using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class ClientesController : System.Web.Mvc.Controller
+    public class ClientesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Clientes
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(PessoasPorDadosBasicosViewModel viewModel)
         {
-            var clientes = db.Clientes.Include(c => c.Pessoa);
-            return View(await clientes.ToListAsync());
+            IQueryable<Pessoa> pessoas = db.Pessoas;
+
+                    
+            if(viewModel.Tipo == Models.Enum.TipoPessoa.PESSOAFISICA)
+            {
+                if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
+                {
+                    pessoas = db.PessoasFisicas
+                    .Where(s => s.UserName.Contains(viewModel.TermoPesquisa) || s.Cpf.Contains(viewModel.TermoPesquisa));
+                }
+                else
+                {
+                    pessoas = db.PessoasFisicas;
+                }
+            }
+            else if(viewModel.Tipo == Models.Enum.TipoPessoa.PESSOAJURIDICA)
+            {
+                if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
+                {
+                    pessoas = db.PessoasJuridicas
+                    .Where(s => s.UserName.Contains(viewModel.TermoPesquisa) || s.Cnpj.Contains(viewModel.TermoPesquisa));
+                }
+                else
+                {
+                    pessoas = db.PessoasJuridicas;
+                }                                       
+            }                
+            
+
+            if (pessoas != null)
+            {
+                viewModel.Resultados = await pessoas.ToListAsync();
+            }
+
+            return View(viewModel);
         }
 
         // GET: Clientes/Details/5
@@ -68,14 +98,25 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = await db.Clientes.FindAsync(id);
-            if (cliente == null)
+            }     
+          
+
+            var resultado = 
+                db.PessoasFisicas
+                .Select(o => new { ID = o.Id, NOME = o.UserName, CPF = o.Cpf, CNPJ = string.Empty, EMAIL = o.Email, TELEFONE = o.PhoneNumber}).Where(o => o.ID == id).ToList()
+                .Concat(
+                db.PessoasJuridicas
+                .Select(o => new { ID = o.Id, NOME = o.UserName, CPF = string.Empty, CNPJ = o.Cnpj, EMAIL = o.Email, TELEFONE = o.PhoneNumber}).Where(o => o.ID == id).ToList());
+
+            if (resultado == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName", cliente.PessoaId);
-            return View(cliente);
+
+            PessoaViewModel viewModel = new PessoaViewModel(resultado.First().ID, resultado.First().NOME, resultado.First().CPF, resultado.First().CNPJ, resultado.First().EMAIL, resultado.First().TELEFONE);
+
+            ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName", resultado.First().ID);
+            return View(viewModel);
         }
 
         // POST: Clientes/Edit/5
@@ -83,16 +124,30 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PessoaId")] Cliente cliente)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,Cpf,Cnpj,Email,PhoneNumber")] PessoaViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cliente).State = EntityState.Modified;
+                
+                if (viewModel.Cpf != null)
+                {                                        
+                    var pessoa = new PessoaFisica(viewModel.Cpf,viewModel.Id, viewModel.UserName, viewModel.Email, viewModel.PhoneNumber);
+                    db.PessoasFisicas.Attach(pessoa);
+                    db.Entry(pessoa).State = EntityState.Modified;
+                    
+                }
+                else
+                {                                        
+                    var pessoa = new PessoaJuridica(viewModel.Cnpj, viewModel.Id, viewModel.UserName, viewModel.Email, viewModel.PhoneNumber);
+                    db.PessoasJuridicas.Attach(pessoa);
+                    db.Entry(pessoa).State = EntityState.Modified;
+                }
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName", cliente.PessoaId);
-            return View(cliente);
+            ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName", viewModel.Id);
+            return View(viewModel);
         }
 
         // GET: Clientes/Delete/5
