@@ -1,4 +1,5 @@
 ﻿using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.Models.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,12 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
     {
         [Display(Name = "Loja")]
         public int? LojaId { get; set; }
+
+        [Required(ErrorMessage = "É obrigatório informar o local onde deseja salvar o arquivo")]
+        public string LocalArquivo { get; set; }
+
+        [Required(ErrorMessage ="É obrigatório selecionar o formato")]
+        public Formato FormatoEscolhido { get; set; }
 
         public IEnumerable<ProdutosViewModel> Resultados { get; set; }
 

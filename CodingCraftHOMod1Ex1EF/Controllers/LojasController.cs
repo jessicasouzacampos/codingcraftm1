@@ -14,7 +14,6 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
     public class LojasController : System.Web.Mvc.Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
        
         // GET: Lojas
         public async Task<ActionResult> Index(ProdutosPorLojaViewModel viewModel)
@@ -34,16 +33,41 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 
             ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.LojaId);
             viewModel.Resultados = produtos;
-
-
-            if (produtos.Count() > 0)
-            {
-                ArquivosHelperExtensions.SalvarExcel("EAE", produtos.ToList());
-                ArquivosHelperExtensions.SalvarJson(produtos.ToList());
-                ArquivosHelperExtensions.SalvarXML(produtos.ToList(), "ProdutosViewModel");
-            }            
-
+            
             return View(viewModel);
+        }
+
+        public ActionResult SalvarPesquisa(ProdutosPorLojaViewModel viewModel)
+        {
+            if (viewModel.Resultados.Count() > 0)
+            {
+                string filePath = string.Empty;
+
+                if (viewModel.FormatoEscolhido == Models.Enum.Formato.Excel)
+                {
+                    filePath = ArquivosHelperExtensions.SalvarExcel("ProdutosPorLoja", viewModel.Resultados.ToList());
+                    Response.ContentType = "application/vnd.ms-excel";
+                }
+                else if (viewModel.FormatoEscolhido == Models.Enum.Formato.JSON)
+                {
+                    filePath = ArquivosHelperExtensions.SalvarJson(viewModel.Resultados.ToList(), "ProdutosPorLoja");
+                    Response.ContentType = "application/json";
+                }
+                else if (viewModel.FormatoEscolhido == Models.Enum.Formato.XML)
+                {
+                    filePath = ArquivosHelperExtensions.SalvarXML(viewModel.Resultados.ToList(), "ProdutosViewModel", "ProdutosPorLoja");
+                    Response.ContentType = "application/xml";
+                }
+
+                if (filePath != string.Empty)
+                {
+                    Response.AppendHeader("content-disposition", "attachment; filename=" + filePath);
+                    Response.TransmitFile(filePath);
+                    Response.End();
+                }
+            }
+            return View(viewModel);
+
         }
 
         // GET: Lojas

@@ -14,7 +14,6 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-
 <table class="table">
     <tr>
         <th>
@@ -44,3 +43,30 @@
     }
 
 </table>
+
+
+@using (Html.BeginForm("SalvarPesquisa", "Lojas", Model, FormMethod.Get))
+{
+        if (Model.Resultados.Count() > 0)
+        {
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.FormatoEscolhido, "Formato", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-2">
+                @Html.EnumDropDownListFor(model => model.FormatoEscolhido, "Selecione o formato", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FormatoEscolhido, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.Label("Local do arquivo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+
+                @Html.EditorFor(model => model.LocalArquivo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LocalArquivo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-md-offset-2 col-md-2">
+                <input type="submit" value="Salvar pesquisa" class="btn btn-default" />
+            </div>
+        </div>
+    }
+}

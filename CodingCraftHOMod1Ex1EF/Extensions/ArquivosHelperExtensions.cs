@@ -15,15 +15,13 @@ namespace CodingCraftHOMod1Ex1EF.Extensions
 {
     public static class ArquivosHelperExtensions
     {
-        public static void SalvarExcel<T>(string nomePlanilha, List<T> Objetos) where T : class
+        public static String SalvarExcel<T>(string nomePlanilha, List<T> Objetos) where T : class
         {
             using (var excelPackage = new ExcelPackage())
-            {
-               
+            {               
                 excelPackage.Workbook.Properties.Author = "Jessica";
                 excelPackage.Workbook.Properties.Title = "Meu Excel";
 
-                
                 var sheet = excelPackage.Workbook.Worksheets.Add(nomePlanilha);
                 sheet.Name = nomePlanilha;           
 
@@ -50,23 +48,34 @@ namespace CodingCraftHOMod1Ex1EF.Extensions
                     coluna = 1;                   
                 }
 
-                string path = @"D:\teste.xlsx";
+                string path = @"D:\"+ nomePlanilha + ".xlsx";
                 File.WriteAllBytes(path, excelPackage.GetAsByteArray());
+                
+                return path;
             }
         }
 
-        public static void SalvarJson<T>(List<T> Objetos) where T : class
+        public static String SalvarJson<T>(List<T> Objetos, string nomeArquivo) where T : class
         {           
-                var json = JsonConvert.SerializeObject(new
-                {
-                    o = Objetos
-                });
-                        
+            var json = JsonConvert.SerializeObject(new
+            {
+                o = Objetos
+            });
+
+            string path = @"D:\" + nomeArquivo + ".json";
+            File.WriteAllText(path, json);
+
+            return path;
         }
 
-        public static void SalvarXML<T>(List<T> Objetos, string elementName) where T : class
+        public static String SalvarXML<T>(List<T> Objetos, string elementName, string nomeArquivo) where T : class
         {
-            XElement element = GetXElements(Objetos, elementName);            
+            XElement element = GetXElements(Objetos, elementName);
+
+            string path = @"D:\" + nomeArquivo + ".xml";   
+            element.Save(path);
+
+            return path;
         }
 
         private static XElement GetXElements<T>(IEnumerable<T> collection, string elementName) where T : class
@@ -80,5 +89,7 @@ namespace CodingCraftHOMod1Ex1EF.Extensions
                 typeof(T).GetProperties()
                          .Select(prop => new XElement(prop.Name, prop.GetValue(item, null))));
         }
+
+        
     }
 }
