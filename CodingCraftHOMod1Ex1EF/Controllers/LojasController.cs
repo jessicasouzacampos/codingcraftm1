@@ -7,6 +7,7 @@ using System.Transactions;
 using System.Linq;
 using System.Collections.Generic;
 using CodingCraftHOMod1Ex1EF.ViewModels;
+using CodingCraftHOMod1Ex1EF.Extensions;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -33,6 +34,14 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 
             ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.LojaId);
             viewModel.Resultados = produtos;
+
+
+            if (produtos.Count() > 0)
+            {
+                ArquivosHelperExtensions.SalvarExcel("EAE", produtos.ToList());
+                ArquivosHelperExtensions.SalvarJson(produtos.ToList());
+                ArquivosHelperExtensions.SalvarXML(produtos.ToList(), "ProdutosViewModel");
+            }            
 
             return View(viewModel);
         }

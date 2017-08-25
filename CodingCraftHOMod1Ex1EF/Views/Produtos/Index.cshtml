@@ -1,5 +1,7 @@
 ﻿@model CodingCraftHOMod1Ex1EF.ViewModels.ProdutoPesquisaViewModel
 @using CodingCraftHOMod1Ex1EF.Models
+@using PagedList.Mvc;
+@using PagedList;
 
 @{
     ViewBag.Title = "Index";
@@ -47,5 +49,7 @@
             </td>
         </tr>
     }
+
+    @Html.PagedListPager((IPagedList)Model.Resultados, page => Url.Action("Index", new { page }))
 
 </table>

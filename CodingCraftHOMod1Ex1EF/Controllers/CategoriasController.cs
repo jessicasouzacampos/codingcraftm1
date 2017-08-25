@@ -19,41 +19,28 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         {             
             List<LojasViewModel> lojas = new List<LojasViewModel>();
 
-            if (viewModel.CategoriaId != null)
+            var produtos_loja = db.ProdutosLojas
+                .Include(o => o.Produto.Categoria)
+                .Include(l => l.Loja)
+                .Where(o=>o.Produto.CategoriaId == viewModel.CategoriaId);
+
+            var resultado = produtos_loja
+                .GroupBy(x=>x.Loja)
+                .Select(c => new {
+                    Quantidade = c.Sum(o => o.Quantidade),
+                    NomeLoja = c.Key.Nome,
+                    LojaID = c.Key.LojaId
+                });
+
+            foreach (var item in resultado)
             {
-                var produtos = db.Produtos
-                .Include(o => o.Categoria)
-                .Include(o => o.ProdutoLojas.Select(b => b.Loja)).ToList();
-
-                produtos = produtos.Where(s => s.CategoriaId == viewModel.CategoriaId).ToList();
-
-               
-                var resultado = produtos.GroupBy(x => new {x.ProdutoLojas}).Select(r => r.Key.ProdutoLojas);
-                   
-                foreach (var item in resultado)
-                {
-                    var resultado2 = item.GroupBy(x => new { x.Loja, x.Quantidade})
-                        .Select(c => new {
-                            Quantidade = c.Sum(o => o.Quantidade),
-                            NomeLoja = c.Key.Loja.Nome,
-                            LojaID = c.Key.Loja.LojaId,
-                        });
-
-                    foreach (var item2 in resultado2)
-                    {
-                        lojas.Add(new LojasViewModel(item2.LojaID, item2.NomeLoja, item2.Quantidade));
-                    }
-
-                }
-
-                var tet = lojas.GroupBy(o => o.LojaId);         
-
+                lojas.Add(new LojasViewModel(item.LojaID, item.NomeLoja, item.Quantidade));
             }
-
-
+            
             ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.CategoriaId);
             viewModel.Resultados = lojas;
             return View(viewModel);
+
         }
 
         // GET: Categorias/Details/5

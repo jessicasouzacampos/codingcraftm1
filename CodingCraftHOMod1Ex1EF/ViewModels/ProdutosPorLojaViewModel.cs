@@ -25,6 +25,10 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
 
     public class ProdutosViewModel
     {
+        public ProdutosViewModel()
+        {
+
+        }
         public ProdutosViewModel(int produtoId, int categoriaId, String nome, decimal valor, decimal quantidade)
         {
             ProdutoId = produtoId;
@@ -34,15 +38,21 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
             Quantidade = quantidade;
         }
 
+        [Display(Name = "Codigo do produto")]
         public int ProdutoId { get; set; }
+
+        [Display(Name = "Codigo da categoria")]
         public int CategoriaId { get; set; }
 
         [StringLength(200)]
+        [Display(Name ="Nome")]
         public String Nome { get; set; }
 
         [DataType(DataType.Currency)]
+        [Display(Name = "Valor")]
         public decimal Valor { get; set; }
 
+        [Display(Name = "Quantidade")]
         public decimal Quantidade { get; set; }
     }
 

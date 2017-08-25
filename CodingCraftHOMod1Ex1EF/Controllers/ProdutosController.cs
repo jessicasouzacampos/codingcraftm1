@@ -7,13 +7,14 @@ using System.Transactions;
 using System.Linq;
 using System;
 using CodingCraftHOMod1Ex1EF.ViewModels;
+using PagedList;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     public class ProdutosController : Controller
     {
         // GET: Produtos
-        public async Task<ActionResult> Index(ProdutoPesquisaViewModel viewModel)
+        public async Task<ActionResult> Index(ProdutoPesquisaViewModel viewModel, int? page)
         {
             var produtos = db.Produtos.Include(p => p.Categoria);
 
@@ -73,8 +74,9 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                 }
             }
 
+            var pagina = page ?? 1;
             ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.CategoriaId);
-            viewModel.Resultados = await produtos.ToListAsync();
+            viewModel.Resultados = produtos.OrderBy(o => o.ProdutoId).ToPagedList(pagina, 5);// ToListAsync();
 
             return View(viewModel);
         }
