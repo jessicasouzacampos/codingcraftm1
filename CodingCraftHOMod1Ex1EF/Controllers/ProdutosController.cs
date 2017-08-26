@@ -8,6 +8,8 @@ using System.Linq;
 using System;
 using CodingCraftHOMod1Ex1EF.ViewModels;
 using PagedList;
+using Microsoft.AspNet.Identity;
+using CodingCraftHOMod1Ex1EF.Extensions;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -15,7 +17,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
     {
         // GET: Produtos
         public async Task<ActionResult> Index(ProdutoPesquisaViewModel viewModel, int? page)
-        {
+        {          
             var produtos = db.Produtos.Include(p => p.Categoria);
 
             if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
@@ -73,7 +75,12 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                     produtos = produtos.Where(s => s.DataUltimaModificacao == viewModel.DataUltimaModificacaoInicial);
                 }
             }
-
+     
+            if (!string.IsNullOrEmpty(User.Identity.Name))
+            {
+                SalvaPesquisaHelperExtensions.Salva<ProdutoPesquisaViewModel>(viewModel, User.Identity.GetUserId());
+            }
+            
             var pagina = page ?? 1;
             ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.CategoriaId);
             viewModel.Resultados = produtos.OrderBy(o => o.ProdutoId).ToPagedList(pagina, 5);// ToListAsync();

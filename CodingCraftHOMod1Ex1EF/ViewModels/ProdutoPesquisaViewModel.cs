@@ -8,6 +8,11 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class ProdutoPesquisaViewModel : EntidadeViewModel
     {
+        public ProdutoPesquisaViewModel()
+        {
+            Unidade = null;
+        }
+
         [Display(Name = "Termo de Pesquisa")]
         public String TermoPesquisa { get; set; }
 
@@ -22,7 +27,7 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         [DataType(DataType.Currency)]
         public decimal? ValorFinal { get; set; }
 
-        public Unidade Unidade { get; set; }
+        public Unidade? Unidade { get; set; }
 
         public IEnumerable<Produto> Resultados { get; set; }
     }

@@ -254,6 +254,7 @@
     <Compile Include="Controllers\ProdutosLojasController.cs" />
     <Compile Include="Extensions\ArquivosHelperExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\SalvaPesquisaHelperExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -263,6 +264,7 @@
     <Compile Include="Mappers\ModelToViewModel.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Enum\Formato.cs" />
+    <Compile Include="Models\PesquisaSalva.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Cliente.cs" />

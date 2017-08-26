@@ -116,5 +116,6 @@ namespace CodingCraftHOMod1Ex1EF.Models
         public DbSet<Compra> Compras { get; set; }
 
         public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<PesquisaSalva> Pesquisas { get; set; }
     }
 }
