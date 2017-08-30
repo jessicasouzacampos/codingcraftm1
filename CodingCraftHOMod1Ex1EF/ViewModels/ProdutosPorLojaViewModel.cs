@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class ProdutosPorLojaViewModel
-    {
+    {     
         [Display(Name = "Loja")]
-        public int? LojaId { get; set; }
+        public string  NomeLoja { get; set; }
 
         [Required(ErrorMessage = "É obrigatório informar o local onde deseja salvar o arquivo")]
         public string LocalArquivo { get; set; }
@@ -24,7 +24,7 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
     public class LojasPorCategoriaViewModel
     {
         [Display(Name = "Categoria")]
-        public int? CategoriaId { get; set; }
+        public string NomeCategoria { get; set; }
 
         public IEnumerable<LojasViewModel> Resultados { get; set; }
 
@@ -36,17 +36,20 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         {
 
         }
-        public ProdutosViewModel(int produtoId, int categoriaId, String nome, decimal valor, decimal quantidade)
+        public ProdutosViewModel(int produtoId, int categoriaId, String nome, decimal valor, decimal quantidade, int prodLojaId)
         {
             ProdutoId = produtoId;
             CategoriaId = categoriaId;
             Nome = nome;
             Valor = valor;
             Quantidade = quantidade;
+            ProdutoLojaId = prodLojaId;
         }
 
         [Display(Name = "Codigo do produto")]
         public int ProdutoId { get; set; }
+
+        public int ProdutoLojaId { get; set; }
 
         [Display(Name = "Codigo da categoria")]
         public int CategoriaId { get; set; }

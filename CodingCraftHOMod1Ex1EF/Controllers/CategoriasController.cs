@@ -22,7 +22,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             var produtos_loja = db.ProdutosLojas
                 .Include(o => o.Produto.Categoria)
                 .Include(l => l.Loja)
-                .Where(o=>o.Produto.CategoriaId == viewModel.CategoriaId);
+                .Where(o=>o.Produto.Nome.Contains(viewModel.NomeCategoria));
 
             var resultado = produtos_loja
                 .GroupBy(x=>x.Loja)
@@ -37,7 +37,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                 lojas.Add(new LojasViewModel(item.LojaID, item.NomeLoja, item.Quantidade));
             }
             
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.CategoriaId);
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.NomeCategoria);
             viewModel.Resultados = lojas;
             return View(viewModel);
 

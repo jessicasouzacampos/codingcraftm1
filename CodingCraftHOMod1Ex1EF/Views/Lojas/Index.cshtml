@@ -34,8 +34,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantidade)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProdutoId }) |
+            <td>                
+                @Html.ActionLink( linkText:"Edit", actionName: "Edit", controllerName: "ProdutosLojas" , routeValues: new { id = item.ProdutoLojaId } , htmlAttributes: new { }) |          
                 @Html.ActionLink("Details", "Details", new { id = item.ProdutoId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ProdutoId })
             </td>

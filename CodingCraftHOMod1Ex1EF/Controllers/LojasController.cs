@@ -21,17 +21,17 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             var loja = db.Lojas.Include(p => p.LojaProdutos.Select(o => o.Produto));
             List<ProdutosViewModel> produtos = new List<ProdutosViewModel>();
 
-            if (viewModel.LojaId != null)
+            if (viewModel.NomeLoja != null)
             {
-               loja = loja.Where(s => s.LojaId == viewModel.LojaId);
+               loja = loja.Where(s => s.Nome.Contains(viewModel.NomeLoja));
 
                 foreach (var item in loja.First().LojaProdutos)
                 {
-                    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade));
+                    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade, item.ProdutoLojaId));
                 }
             }         
 
-            ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.LojaId);
+            ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.NomeLoja);
             viewModel.Resultados = produtos;
             
             return View(viewModel);
@@ -69,29 +69,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             return View(viewModel);
 
         }
-
-        // GET: Lojas
-        public async Task<ActionResult> Index2(ProdutosPorLojaViewModel viewModel)
-        {
-            var loja = db.Lojas.Include(p => p.LojaProdutos.Select(o => o.Produto).GroupBy(ol => ol.CategoriaId));
-
-            List<ProdutosViewModel> produtos = new List<ProdutosViewModel>();
-
-            if (viewModel.LojaId != null)
-            {
-                loja = loja.Where(s => s.LojaId == viewModel.LojaId);
-
-                foreach (var item in loja.First().LojaProdutos)
-                {
-                    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade));
-                }
-            }
-
-            ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.LojaId);
-            viewModel.Resultados = produtos;
-
-            return View(viewModel);
-        }
+        
 
         // GET: Lojas/Details/5
         public async Task<ActionResult> Details(int? id)

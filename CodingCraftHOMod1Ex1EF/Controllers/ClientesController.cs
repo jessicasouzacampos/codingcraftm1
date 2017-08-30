@@ -70,7 +70,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         // GET: Clientes/Create
         public ActionResult Create()
         {
-            ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.Id = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
 
@@ -88,7 +88,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName", cliente.PessoaId);
+            ViewBag.Id = new SelectList(db.Users, "Id", "UserName", cliente.PessoaId);
             return View(cliente);
         }
 
