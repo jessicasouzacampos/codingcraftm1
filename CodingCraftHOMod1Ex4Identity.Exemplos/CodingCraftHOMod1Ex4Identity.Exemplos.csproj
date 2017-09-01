@@ -235,8 +235,8 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Start\UsuarioGrupo.cs" />
-    <Compile Include="App_Start\UsuarioIdentificacao.cs" />
+    <Compile Include="Models\UsuarioGrupo.cs" />
+    <Compile Include="Models\UsuarioIdentificacao.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
