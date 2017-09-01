@@ -9,25 +9,16 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
     public class ProdutosPorLojaViewModel
     {     
         [Display(Name = "Loja")]
-        public string  NomeLoja { get; set; }
+        public string NomeLoja { get; set; }
 
-        [Required(ErrorMessage = "É obrigatório informar o local onde deseja salvar o arquivo")]
-        public string LocalArquivo { get; set; }
+        /* [Required(ErrorMessage = "É obrigatório informar o local onde deseja salvar o arquivo")]
+        public string LocalArquivo { get; set; } */
 
         [Required(ErrorMessage ="É obrigatório selecionar o formato")]
         public Formato FormatoEscolhido { get; set; }
 
-        public IEnumerable<ProdutosViewModel> Resultados { get; set; }
-
-    }
-
-    public class LojasPorCategoriaViewModel
-    {
-        [Display(Name = "Categoria")]
-        public string NomeCategoria { get; set; }
-
-        public IEnumerable<LojasViewModel> Resultados { get; set; }
-
+        // public IEnumerable<ProdutosViewModel> Resultados { get; set; }
+        public IEnumerable<Loja> Resultados { get; set; }
     }
 
     public class ProdutosViewModel

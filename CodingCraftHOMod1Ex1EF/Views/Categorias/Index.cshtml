@@ -2,7 +2,7 @@
 @using CodingCraftHOMod1Ex1EF.Models
 
 @{
-    ViewBag.Title = "Index";   
+    ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -15,30 +15,31 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayName("Loja")
+            @Html.DisplayName("Nome")
         </th>
 
         <th>
-            @Html.DisplayName("Quantidade")
+            @Html.DisplayName("Quantidade de Produtos")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model.Resultados) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
+    @foreach (var item in Model.Resultados)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantidade)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LojaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LojaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LojaId })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Produtos.Count)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { id = item.CategoriaId }) |
+                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.CategoriaId }) |
+                @Html.ActionLink("Excluir", "Delete", new { id = item.CategoriaId })
+            </td>
+        </tr>
+    }
 
 </table>

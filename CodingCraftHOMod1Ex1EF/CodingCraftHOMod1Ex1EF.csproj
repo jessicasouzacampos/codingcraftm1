@@ -284,6 +284,7 @@
     <Compile Include="Models\Interfaces\IEntidade.cs" />
     <Compile Include="Models\Interfaces\IEntidadeNaoEditavel.cs" />
     <Compile Include="Models\Loja.cs" />
+    <Compile Include="ViewModels\LojasPorCategoriaViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\ProdutoLoja.cs" />

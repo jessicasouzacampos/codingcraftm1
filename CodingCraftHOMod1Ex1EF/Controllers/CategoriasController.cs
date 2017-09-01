@@ -7,6 +7,7 @@ using System.Transactions;
 using CodingCraftHOMod1Ex1EF.ViewModels;
 using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -19,7 +20,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         {             
             List<LojasViewModel> lojas = new List<LojasViewModel>();
 
-            var produtos_loja = db.ProdutosLojas
+            /* var produtos_loja = db.ProdutosLojas
                 .Include(o => o.Produto.Categoria)
                 .Include(l => l.Loja)
                 .Where(o=>o.Produto.Nome.Contains(viewModel.NomeCategoria));
@@ -30,15 +31,22 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                     Quantidade = c.Sum(o => o.Quantidade),
                     NomeLoja = c.Key.Nome,
                     LojaID = c.Key.LojaId
-                });
+                }); */
 
-            foreach (var item in resultado)
+            IQueryable<Categoria> categorias = db.Categorias;
+
+            if (!String.IsNullOrEmpty(viewModel.NomeCategoria))
+            {
+                categorias = categorias.Where(c => c.Nome.Contains(viewModel.NomeCategoria));
+            }
+
+            /* foreach (var item in resultado)
             {
                 lojas.Add(new LojasViewModel(item.LojaID, item.NomeLoja, item.Quantidade));
-            }
+            } */
             
             ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.NomeCategoria);
-            viewModel.Resultados = lojas;
+            viewModel.Resultados = categorias.ToList();
             return View(viewModel);
 
         }

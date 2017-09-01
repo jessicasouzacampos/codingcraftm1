@@ -14,26 +14,26 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
     public class LojasController : System.Web.Mvc.Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-       
+
         // GET: Lojas
         public async Task<ActionResult> Index(ProdutosPorLojaViewModel viewModel)
         {
             var loja = db.Lojas.Include(p => p.LojaProdutos.Select(o => o.Produto));
-            List<ProdutosViewModel> produtos = new List<ProdutosViewModel>();
+            // List<ProdutosViewModel> produtos = new List<ProdutosViewModel>();
 
             if (viewModel.NomeLoja != null)
             {
-               loja = loja.Where(s => s.Nome.Contains(viewModel.NomeLoja));
+                loja = loja.Where(s => s.Nome.Contains(viewModel.NomeLoja));
 
-                foreach (var item in loja.First().LojaProdutos)
-                {
-                    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade, item.ProdutoLojaId));
-                }
-            }         
+                //foreach (var item in loja.First().LojaProdutos)
+                //{
+                //    produtos.Add(new ProdutosViewModel(item.Produto.ProdutoId, item.Produto.CategoriaId, item.Produto.Nome, item.Produto.Valor, item.Quantidade, item.ProdutoLojaId));
+                //}
+            }
 
             ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.NomeLoja);
-            viewModel.Resultados = produtos;
-            
+            viewModel.Resultados = loja.ToList();
+
             return View(viewModel);
         }
 
@@ -69,7 +69,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             return View(viewModel);
 
         }
-        
+
 
         // GET: Lojas/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -108,7 +108,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 
                     scope.Complete();
                     return RedirectToAction("Index");
-                }                
+                }
             }
 
             return View(loja);
@@ -145,7 +145,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 
                     scope.Complete();
                     return RedirectToAction("Index");
-                }            
+                }
             }
             return View(loja);
         }
@@ -179,7 +179,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                 scope.Complete();
                 return RedirectToAction("Index");
             }
-                            
+
         }
 
         protected override void Dispose(bool disposing)
