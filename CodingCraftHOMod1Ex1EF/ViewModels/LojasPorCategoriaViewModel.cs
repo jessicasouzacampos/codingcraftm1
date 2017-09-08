@@ -1,8 +1,8 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels;
+﻿using CodingCraftHOMod1Ex1EF.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     public class LojasPorCategoriaViewModel
     {

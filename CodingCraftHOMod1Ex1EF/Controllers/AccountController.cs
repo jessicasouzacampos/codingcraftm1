@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.ViewModels;
-using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
+using CodingCraftHOMod1Ex1EF.Models.Acesso;
 using System;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
@@ -136,6 +137,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.CargoId = new SelectList(db.Cargos, "CargoId", "Nome");
             return View();
         }
 

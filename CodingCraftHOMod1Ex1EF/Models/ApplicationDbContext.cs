@@ -1,5 +1,5 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
-using CodingCraftHOMod1Ex1EF.ViewModels.Interfaces;
+﻿using CodingCraftHOMod1Ex1EF.Models.Acesso;
+using CodingCraftHOMod1Ex1EF.Models.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     public class ApplicationDbContext : IdentityDbContext<Usuario, Grupo, Guid, UsuarioLogin, UsuarioGrupo, UsuarioIdentificacao>
     {
@@ -124,5 +124,8 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
 
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<PesquisaSalva> Pesquisas { get; set; }
+
+        public DbSet<Cargo> Cargos { get; set; }
+       // public DbSet<Usuario> Usuarios { get; set; }
     }
 }

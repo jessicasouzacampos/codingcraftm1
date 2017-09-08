@@ -1,7 +1,7 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels.Enum;
+﻿using CodingCraftHOMod1Ex1EF.Models.Enum;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     public class ItemCompra
     {

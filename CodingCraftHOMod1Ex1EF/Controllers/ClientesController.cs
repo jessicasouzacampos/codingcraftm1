@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using CodingCraftHOMod1Ex1EF.ViewModels;
-using CodingCraftHOMod1Ex1EF.ViewModels;
+using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.Models;
 using System.Linq;
 using System;
 
@@ -17,7 +17,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             IQueryable<Pessoa> pessoas = db.Pessoas;
 
                     
-            if(viewModel.Tipo == ViewModels.Enum.TipoPessoa.PESSOAFISICA)
+            if(viewModel.Tipo == Models.Enum.TipoPessoa.PESSOAFISICA)
             {
                 if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
                 {
@@ -29,7 +29,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                     pessoas = db.PessoasFisicas;
                 }
             }
-            else if(viewModel.Tipo == ViewModels.Enum.TipoPessoa.PESSOAJURIDICA)
+            else if(viewModel.Tipo == Models.Enum.TipoPessoa.PESSOAJURIDICA)
             {
                 if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
                 {

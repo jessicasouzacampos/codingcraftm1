@@ -2,11 +2,10 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using CodingCraftHOMod1Ex1EF.ViewModels;
+using CodingCraftHOMod1Ex1EF.Models;
 using System.Transactions;
 using System.Linq;
 using System;
-using CodingCraftHOMod1Ex1EF.ViewModels;
 using PagedList;
 using Microsoft.AspNet.Identity;
 using CodingCraftHOMod1Ex1EF.Extensions;

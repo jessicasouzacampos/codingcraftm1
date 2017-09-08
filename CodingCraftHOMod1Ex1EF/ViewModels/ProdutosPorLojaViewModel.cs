@@ -1,10 +1,10 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels;
-using CodingCraftHOMod1Ex1EF.ViewModels.Enum;
+﻿using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.Models.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     public class ProdutosPorLojaViewModel
     {     

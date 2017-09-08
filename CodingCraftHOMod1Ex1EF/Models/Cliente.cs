@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     public class Cliente
     {

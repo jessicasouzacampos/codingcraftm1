@@ -1,9 +1,9 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
+﻿using CodingCraftHOMod1Ex1EF.Models.Acesso;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     public class PesquisaSalva
     {

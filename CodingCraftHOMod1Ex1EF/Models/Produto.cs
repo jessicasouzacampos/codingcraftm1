@@ -1,12 +1,12 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels.Enum;
-using CodingCraftHOMod1Ex1EF.ViewModels.Interfaces;
+﻿using CodingCraftHOMod1Ex1EF.Models.Enum;
+using CodingCraftHOMod1Ex1EF.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels
+namespace CodingCraftHOMod1Ex1EF.Models
 {
     [Table("Produtos")]
     public class Produto : Entidade, IEntidadePesquisa

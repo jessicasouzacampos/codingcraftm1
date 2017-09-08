@@ -1,4 +1,4 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels.Interfaces;
+﻿using CodingCraftHOMod1Ex1EF.Models.Interfaces;
 using System;
 using System.Linq;
 using System.Web.Mvc;

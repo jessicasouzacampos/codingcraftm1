@@ -1,4 +1,4 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels;
+﻿using CodingCraftHOMod1Ex1EF.Models;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {

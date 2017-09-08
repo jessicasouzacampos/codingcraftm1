@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace CodingCraftHOMod1Ex1EF.ViewModels.Acesso
+namespace CodingCraftHOMod1Ex1EF.Models.Acesso
 {
     public class ArmazenamentoGrupos : RoleStore<Grupo, Guid, UsuarioGrupo>
     {

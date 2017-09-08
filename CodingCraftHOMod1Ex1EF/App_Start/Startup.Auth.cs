@@ -4,8 +4,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using CodingCraftHOMod1Ex1EF.ViewModels;
-using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
+using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.Models.Acesso;
 
 namespace CodingCraftHOMod1Ex1EF
 {

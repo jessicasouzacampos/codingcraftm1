@@ -1,5 +1,5 @@
-﻿using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
-using CodingCraftHOMod1Ex1EF.ViewModels;
+﻿using CodingCraftHOMod1Ex1EF.Models.Acesso;
+using CodingCraftHOMod1Ex1EF.Models;
 using CodingCraftHOMod1Ex1EF.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;

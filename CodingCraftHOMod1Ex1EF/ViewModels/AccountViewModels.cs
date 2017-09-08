@@ -79,6 +79,10 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Cargo")]
+        public int? CargoId { get; set; }
     }
 
     public class ResetPasswordViewModel

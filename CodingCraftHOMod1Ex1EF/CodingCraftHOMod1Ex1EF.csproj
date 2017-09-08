@@ -239,6 +239,7 @@
     <Compile Include="Atributos\CnpjAttribute.cs" />
     <Compile Include="Atributos\CpfAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Controllers\Controller`1.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Models\Acesso\UsuarioGrupo.cs" />
     <Compile Include="Models\Acesso\UsuarioIdentificacao.cs" />
     <Compile Include="Models\Acesso\UsuarioLogin.cs" />
+    <Compile Include="Models\Cargo.cs" />
     <Compile Include="Models\Enum\Formato.cs" />
     <Compile Include="Models\PesquisaSalva.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -434,6 +436,11 @@
     <Content Include="Views\Pessoas\Edit.cshtml" />
     <Content Include="Views\Pessoas\Index.cshtml" />
     <Content Include="Views\Clientes\_Pesquisa.cshtml" />
+    <Content Include="Views\Cargos\Create.cshtml" />
+    <Content Include="Views\Cargos\Delete.cshtml" />
+    <Content Include="Views\Cargos\Details.cshtml" />
+    <Content Include="Views\Cargos\Edit.cshtml" />
+    <Content Include="Views\Cargos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
