@@ -1,10 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using CodingCraftHOMod1Ex1EF.ViewModels;
 using System.ComponentModel;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class PessoaFisica : Pessoa
     {

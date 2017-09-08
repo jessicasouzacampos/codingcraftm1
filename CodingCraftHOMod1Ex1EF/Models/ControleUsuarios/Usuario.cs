@@ -2,13 +2,21 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.Models.ControleUsuarios
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class Usuario : IdentityUser
+    public class Usuario : IdentityUser<Guid, UsuarioLogin, UsuarioGrupo, UsuarioIdentificacao>
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Usuario> manager)
+        [Display(Name = "Nome de Usuário")]
+        public override string UserName { get; set; }
+
+        public virtual ICollection<UsuarioEndereco> UsuarioEnderecos { get; set; }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Usuario, Guid> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);

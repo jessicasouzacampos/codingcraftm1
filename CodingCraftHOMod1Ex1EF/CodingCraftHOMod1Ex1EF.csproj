@@ -263,6 +263,12 @@
     <Compile Include="Mappers\ViewModelToModel .cs" />
     <Compile Include="Mappers\ModelToViewModel.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Acesso\ArmazenamentoGrupos.cs" />
+    <Compile Include="Models\Acesso\ArmazenamentoUsuarios.cs" />
+    <Compile Include="Models\Acesso\Grupo.cs" />
+    <Compile Include="Models\Acesso\UsuarioGrupo.cs" />
+    <Compile Include="Models\Acesso\UsuarioIdentificacao.cs" />
+    <Compile Include="Models\Acesso\UsuarioLogin.cs" />
     <Compile Include="Models\Enum\Formato.cs" />
     <Compile Include="Models\PesquisaSalva.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -277,7 +283,7 @@
     <Compile Include="Models\PessoaFisica.cs" />
     <Compile Include="Models\PessoaJuridica.cs" />
     <Compile Include="Models\Enum\TipoPessoa.cs" />
-    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Acesso\Usuario.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Entidade.cs" />
     <Compile Include="Models\EntidadeNaoEditavel.cs" />

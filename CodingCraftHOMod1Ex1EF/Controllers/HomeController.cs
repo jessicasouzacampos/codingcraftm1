@@ -2,16 +2,17 @@
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    public class HomeController : System.Web.Mvc.Controller
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your app description page.";
 
             return View();
         }

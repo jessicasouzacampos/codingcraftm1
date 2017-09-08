@@ -1,4 +1,4 @@
-﻿using CodingCraftHOMod1Ex1EF.Models;
+﻿using CodingCraftHOMod1Ex1EF.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

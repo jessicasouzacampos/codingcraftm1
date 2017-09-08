@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 using System.Transactions;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers

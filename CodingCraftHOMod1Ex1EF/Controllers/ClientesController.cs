@@ -2,10 +2,9 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 using CodingCraftHOMod1Ex1EF.ViewModels;
 using System.Linq;
-using System.Collections.Generic;
 using System;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
@@ -18,7 +17,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             IQueryable<Pessoa> pessoas = db.Pessoas;
 
                     
-            if(viewModel.Tipo == Models.Enum.TipoPessoa.PESSOAFISICA)
+            if(viewModel.Tipo == ViewModels.Enum.TipoPessoa.PESSOAFISICA)
             {
                 if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
                 {
@@ -30,7 +29,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                     pessoas = db.PessoasFisicas;
                 }
             }
-            else if(viewModel.Tipo == Models.Enum.TipoPessoa.PESSOAJURIDICA)
+            else if(viewModel.Tipo == ViewModels.Enum.TipoPessoa.PESSOAJURIDICA)
             {
                 if (!String.IsNullOrEmpty(viewModel.TermoPesquisa))
                 {
@@ -103,17 +102,17 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 
             var resultado = 
                 db.PessoasFisicas
-                .Select(o => new { ID = o.Id, NOME = o.UserName, CPF = o.Cpf, CNPJ = string.Empty, EMAIL = o.Email, TELEFONE = o.PhoneNumber}).Where(o => o.ID == id).ToList()
+                .Select(o => new { ID = o.Id, NOME = o.UserName, CPF = o.Cpf, CNPJ = string.Empty, EMAIL = o.Email, TELEFONE = o.PhoneNumber}).Where(o => o.ID == new Guid(id)).ToList()
                 .Concat(
                 db.PessoasJuridicas
-                .Select(o => new { ID = o.Id, NOME = o.UserName, CPF = string.Empty, CNPJ = o.Cnpj, EMAIL = o.Email, TELEFONE = o.PhoneNumber}).Where(o => o.ID == id).ToList());
+                .Select(o => new { ID = o.Id, NOME = o.UserName, CPF = string.Empty, CNPJ = o.Cnpj, EMAIL = o.Email, TELEFONE = o.PhoneNumber}).Where(o => o.ID == new Guid(id)).ToList());
 
             if (resultado == null)
             {
                 return HttpNotFound();
             }
-
-            PessoaViewModel viewModel = new PessoaViewModel(resultado.First().ID, resultado.First().NOME, resultado.First().CPF, resultado.First().CNPJ, resultado.First().EMAIL, resultado.First().TELEFONE);
+            //TODO posso fazer esse ToString()
+            PessoaViewModel viewModel = new PessoaViewModel(resultado.First().ID.ToString(), resultado.First().NOME, resultado.First().CPF, resultado.First().CNPJ, resultado.First().EMAIL, resultado.First().TELEFONE);
 
             ViewBag.PessoaId = new SelectList(db.Users, "Id", "UserName", resultado.First().ID);
             return View(viewModel);

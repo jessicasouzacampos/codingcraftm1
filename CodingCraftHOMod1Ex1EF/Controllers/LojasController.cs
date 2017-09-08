@@ -2,10 +2,9 @@
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 using System.Transactions;
 using System.Linq;
-using System.Collections.Generic;
 using CodingCraftHOMod1Ex1EF.ViewModels;
 using CodingCraftHOMod1Ex1EF.Extensions;
 
@@ -43,17 +42,17 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             {
                 string filePath = string.Empty;
 
-                if (viewModel.FormatoEscolhido == Models.Enum.Formato.Excel)
+                if (viewModel.FormatoEscolhido == ViewModels.Enum.Formato.Excel)
                 {
                     filePath = ArquivosHelperExtensions.SalvarExcel("ProdutosPorLoja", viewModel.Resultados.ToList());
                     Response.ContentType = "application/vnd.ms-excel";
                 }
-                else if (viewModel.FormatoEscolhido == Models.Enum.Formato.JSON)
+                else if (viewModel.FormatoEscolhido == ViewModels.Enum.Formato.JSON)
                 {
                     filePath = ArquivosHelperExtensions.SalvarJson(viewModel.Resultados.ToList(), "ProdutosPorLoja");
                     Response.ContentType = "application/json";
                 }
-                else if (viewModel.FormatoEscolhido == Models.Enum.Formato.XML)
+                else if (viewModel.FormatoEscolhido == ViewModels.Enum.Formato.XML)
                 {
                     filePath = ArquivosHelperExtensions.SalvarXML(viewModel.Resultados.ToList(), "ProdutosViewModel", "ProdutosPorLoja");
                     Response.ContentType = "application/xml";

@@ -1,5 +1,5 @@
-﻿using CodingCraftHOMod1Ex1EF.Models;
-using CodingCraftHOMod1Ex1EF.Models.Enum;
+﻿using CodingCraftHOMod1Ex1EF.ViewModels;
+using CodingCraftHOMod1Ex1EF.ViewModels.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

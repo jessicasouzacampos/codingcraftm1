@@ -1,8 +1,12 @@
 namespace CodingCraftHOMod1Ex1EF.Migrations
 {
+    using Microsoft.AspNet.Identity;
     using System.Data.Entity.Migrations;
+    using ViewModels.Acesso;
+    using ViewModels;
+    using System;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CodingCraftHOMod1Ex1EF.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
@@ -10,20 +14,36 @@ namespace CodingCraftHOMod1Ex1EF.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(CodingCraftHOMod1Ex1EF.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var userManager = new GerenciadorUsuarios(new ArmazenamentoUsuarios(context));
+            var roleManager = new GerenciadorGrupos(new ArmazenamentoGrupos(context));
+            const string name = "admin@example.com";
+            const string password = "Admin@123456";
+            const string roleName = "Admin";
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            //Create Role Admin if it does not exist
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new Grupo { Name = roleName , Id = Guid.NewGuid()};
+                var roleresult = roleManager.Create(role);
+            }
+
+            var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name };
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            // Add user admin to Role Admin if not already added
+            var rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id, role.Name);
+            }
         }
     }
 }

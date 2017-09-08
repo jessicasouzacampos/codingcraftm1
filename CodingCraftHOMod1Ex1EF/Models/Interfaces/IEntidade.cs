@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodingCraftHOMod1Ex1EF.Models.Interfaces
+namespace CodingCraftHOMod1Ex1EF.ViewModels.Interfaces
 {
     public interface IEntidade : IEntidadeNaoEditavel
     {

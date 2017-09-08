@@ -1,11 +1,6 @@
-﻿using CodingCraftHOMod1Ex1EF.Models;
-using Microsoft.AspNet.Identity;
+﻿using CodingCraftHOMod1Ex1EF.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Web;
-using System.Web.Providers.Entities;
 
 namespace CodingCraftHOMod1Ex1EF.Extensions
 {
@@ -31,7 +26,7 @@ namespace CodingCraftHOMod1Ex1EF.Extensions
                 using (var ctx = new ApplicationDbContext())
                 {
                     pesquisa.DataHoraPesquisa = DateTime.Now;
-                    pesquisa.UsuarioId = userId;
+                    pesquisa.UsuarioId = new Guid(userId);
                     ctx.Pesquisas.Add(pesquisa);
                     ctx.SaveChanges();
                 }

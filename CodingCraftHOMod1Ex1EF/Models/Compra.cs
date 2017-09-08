@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class Compra
     {
@@ -11,7 +11,7 @@ namespace CodingCraftHOMod1Ex1EF.Models
         public int CompraId { get; set; }
 
         [ForeignKey("Fornecedor")]
-        public String PessoaId { get; set; }
+        public Guid PessoaId { get; set; }
 
         public DateTime Data { get; set; }
 

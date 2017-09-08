@@ -1,9 +1,7 @@
-﻿using CodingCraftHOMod1Ex1EF.Models.Interfaces;
+﻿using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
 using System;
-using System.ComponentModel;
-using CodingCraftHOMod1Ex1EF.ViewModels;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class Pessoa : Usuario
     {
@@ -17,7 +15,7 @@ namespace CodingCraftHOMod1Ex1EF.Models
 
         public Pessoa(String id, String nome, String email, String telefone)
         {
-            Id = id;
+            Id = new Guid(id);
             UserName = nome;
             Email = email;
             PhoneNumber = telefone;

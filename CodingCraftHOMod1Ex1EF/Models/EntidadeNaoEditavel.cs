@@ -1,9 +1,9 @@
-﻿using CodingCraftHOMod1Ex1EF.Models.Interfaces;
+﻿using CodingCraftHOMod1Ex1EF.ViewModels.Interfaces;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public abstract class EntidadeNaoEditavel : IEntidadeNaoEditavel
     {

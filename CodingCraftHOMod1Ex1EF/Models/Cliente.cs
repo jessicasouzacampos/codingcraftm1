@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class Cliente
     {
         [Key, ForeignKey("Pessoa")]
-        public String PessoaId { get; set; }
+        public Guid PessoaId { get; set; }
 
         public virtual Pessoa Pessoa { get; set; }
     }

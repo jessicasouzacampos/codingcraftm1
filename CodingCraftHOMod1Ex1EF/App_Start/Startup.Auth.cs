@@ -4,7 +4,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.ViewModels;
+using CodingCraftHOMod1Ex1EF.ViewModels.Acesso;
 
 namespace CodingCraftHOMod1Ex1EF
 {
@@ -15,7 +16,7 @@ namespace CodingCraftHOMod1Ex1EF
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<GerenciadorUsuarios>(GerenciadorUsuarios.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
@@ -29,9 +30,10 @@ namespace CodingCraftHOMod1Ex1EF
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, Usuario>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<GerenciadorUsuarios, Usuario, Guid>(
                         validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                        getUserIdCallback: (user) => new Guid(user.GetUserId()),
+                        regenerateIdentityCallback: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

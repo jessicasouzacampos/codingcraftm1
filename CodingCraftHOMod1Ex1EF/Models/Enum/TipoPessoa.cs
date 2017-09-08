@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CodingCraftHOMod1Ex1EF.Models.Enum
+namespace CodingCraftHOMod1Ex1EF.ViewModels.Enum
 {
     public enum TipoPessoa
     {       
