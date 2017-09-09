@@ -8,8 +8,6 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     public class ComprasController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Compras
         public async Task<ActionResult> Index()
         {

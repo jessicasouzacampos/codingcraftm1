@@ -31,7 +31,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             }
 
             ViewBag.LojaId = new SelectList(db.Lojas, "LojaId", "Nome", viewModel.NomeLoja);
-            viewModel.Resultados = loja.ToList();
+            viewModel.Resultados = await loja.ToListAsync();
 
             return View(viewModel);
         }

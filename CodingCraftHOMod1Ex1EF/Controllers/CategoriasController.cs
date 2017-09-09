@@ -46,7 +46,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             } */
             
             ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Nome", viewModel.NomeCategoria);
-            viewModel.Resultados = categorias.ToList();
+            viewModel.Resultados = await categorias.ToListAsync();
             return View(viewModel);
 
         }

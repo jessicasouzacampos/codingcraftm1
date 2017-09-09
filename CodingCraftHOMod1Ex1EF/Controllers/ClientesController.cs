@@ -92,7 +92,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         }
 
         // GET: Clientes/Edit/5
-        public async Task<ActionResult> Edit(string id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {

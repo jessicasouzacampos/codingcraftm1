@@ -16,7 +16,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
     public class ProdutosController : Controller
     {
         // GET: Produtos
-        public async Task<ActionResult> Index(ProdutoPesquisaViewModel viewModel, int? page)
+        public ActionResult Index(ProdutoPesquisaViewModel viewModel, int? page)
         {          
             var produtos = db.Produtos.Include(p => p.Categoria);
 

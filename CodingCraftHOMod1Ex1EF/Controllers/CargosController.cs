@@ -13,8 +13,6 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     public class CargosController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Cargos
         public async Task<ActionResult> Index()
         {
