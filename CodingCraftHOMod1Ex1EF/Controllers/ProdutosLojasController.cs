@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.Models;
 using System.Transactions;
 using System.Linq;
-using CodingCraftHOMod1Ex1EF.Models;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {

@@ -1,17 +1,15 @@
-﻿using IdentitySample.Models;
-using Microsoft.AspNet.Identity;
+﻿using CodingCraftHOMod1Ex1EF.ViewModels;
+using CodingCraftHOMod1Ex1EF.Models.Acesso;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System;
 
-namespace IdentitySample.Controllers
+namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
@@ -20,18 +18,18 @@ namespace IdentitySample.Controllers
         {
         }
 
-        public UsersAdminController(ApplicationUserManager userManager, ApplicationRoleManager roleManager)
+        public UsersAdminController(GerenciadorUsuarios userManager, GerenciadorGrupos roleManager)
         {
             UserManager = userManager;
             RoleManager = roleManager;
         }
 
-        private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
+        private GerenciadorUsuarios _userManager;
+        public GerenciadorUsuarios UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<GerenciadorUsuarios>();
             }
             private set
             {
@@ -39,12 +37,12 @@ namespace IdentitySample.Controllers
             }
         }
 
-        private ApplicationRoleManager _roleManager;
-        public ApplicationRoleManager RoleManager
+        private GerenciadorGrupos _roleManager;
+        public GerenciadorGrupos RoleManager
         {
             get
             {
-                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+                return _roleManager ?? HttpContext.GetOwinContext().Get<GerenciadorGrupos>();
             }
             private set
             {
@@ -61,7 +59,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Details/5
-        public async Task<ActionResult> Details(string id)
+        public async Task<ActionResult> Details(Guid id)
         {
             if (id == null)
             {
@@ -90,7 +88,7 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = userViewModel.Email, Email = userViewModel.Email };
+                var user = new Usuario { UserName = userViewModel.Email, Email = userViewModel.Email };
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -122,7 +120,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Edit/1
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(Guid id)
         {
             if (id == null)
             {
@@ -192,7 +190,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Users/Delete/5
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             if (id == null)
             {
@@ -210,7 +208,7 @@ namespace IdentitySample.Controllers
         // POST: /Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
+        public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             if (ModelState.IsValid)
             {

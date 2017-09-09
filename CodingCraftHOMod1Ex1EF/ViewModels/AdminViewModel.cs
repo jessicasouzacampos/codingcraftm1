@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using System;
 
-namespace IdentitySample.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class RoleViewModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "RoleName")]
         public string Name { get; set; }
@@ -14,7 +15,7 @@ namespace IdentitySample.Models
 
     public class EditUserViewModel
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "Email")]

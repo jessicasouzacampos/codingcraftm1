@@ -8,5 +8,6 @@ namespace CodingCraftHOMod1Ex1EF.Models.Acesso
 {
     public class Grupo : IdentityRole<Guid, UsuarioGrupo>
     {
+  
     }
 }

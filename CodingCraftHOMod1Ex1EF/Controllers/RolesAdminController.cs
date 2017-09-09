@@ -1,4 +1,5 @@
-﻿using IdentitySample.Models;
+﻿using CodingCraftHOMod1Ex1EF.Models.Acesso;
+using CodingCraftHOMod1Ex1EF.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -8,8 +9,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System;
+using System.Data.Entity;
 
-namespace IdentitySample.Controllers
+namespace CodingCraftHOMod1Ex1EF.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RolesAdminController : Controller
@@ -18,19 +21,19 @@ namespace IdentitySample.Controllers
         {
         }
 
-        public RolesAdminController(ApplicationUserManager userManager,
-            ApplicationRoleManager roleManager)
+        public RolesAdminController(GerenciadorUsuarios userManager,
+            GerenciadorGrupos roleManager)
         {
             UserManager = userManager;
             RoleManager = roleManager;
         }
 
-        private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
+        private GerenciadorUsuarios _userManager;
+        public GerenciadorUsuarios UserManager
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<GerenciadorUsuarios>();
             }
             set
             {
@@ -38,12 +41,12 @@ namespace IdentitySample.Controllers
             }
         }
 
-        private ApplicationRoleManager _roleManager;
-        public ApplicationRoleManager RoleManager
+        private GerenciadorGrupos _roleManager;
+        public GerenciadorGrupos RoleManager
         {
             get
             {
-                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+                return _roleManager ?? HttpContext.GetOwinContext().Get<GerenciadorGrupos>();
             }
             private set
             {
@@ -53,14 +56,14 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Roles/
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(RoleManager.Roles);
+            return View(await RoleManager.Roles.ToListAsync());
         }
 
         //
         // GET: /Roles/Details/5
-        public async Task<ActionResult> Details(string id)
+        public async Task<ActionResult> Details(Guid id)
         {
             if (id == null)
             {
@@ -68,7 +71,7 @@ namespace IdentitySample.Controllers
             }
             var role = await RoleManager.FindByIdAsync(id);
             // Get the list of Users in this Role
-            var users = new List<ApplicationUser>();
+            var users = new List<Usuario>();
 
             // Get the list of Users in this Role
             foreach (var user in UserManager.Users.ToList())
@@ -98,7 +101,7 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = new IdentityRole(roleViewModel.Name);
+                var role = new Grupo { Name = roleViewModel.Name };
                 var roleresult = await RoleManager.CreateAsync(role);
                 if (!roleresult.Succeeded)
                 {
@@ -112,7 +115,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Roles/Edit/Admin
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(Guid id)
         {
             if (id == null)
             {
@@ -146,7 +149,7 @@ namespace IdentitySample.Controllers
 
         //
         // GET: /Roles/Delete/5
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             if (id == null)
             {
@@ -164,7 +167,7 @@ namespace IdentitySample.Controllers
         // POST: /Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id, string deleteUser)
+        public async Task<ActionResult> DeleteConfirmed(Guid id, string deleteUser)
         {
             if (ModelState.IsValid)
             {

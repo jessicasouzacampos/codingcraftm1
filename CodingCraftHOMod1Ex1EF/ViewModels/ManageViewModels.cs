@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
@@ -58,6 +58,7 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         public string ConfirmPassword { get; set; }
     }
 
+
     public class AddPhoneNumberViewModel
     {
         [Required]
@@ -83,4 +84,5 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CodingCraftHOMod1Ex1EF.Models
+namespace CodingCraftHOMod1Ex1EF.ViewModels
 {
     public class LojasPorCategoriaViewModel
     {

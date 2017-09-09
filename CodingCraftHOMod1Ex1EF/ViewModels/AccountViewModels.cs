@@ -20,7 +20,6 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
     }
 
     public class VerifyCodeViewModel
@@ -35,8 +34,6 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
 
         [Display(Name = "Remember this browser?")]
         public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
     }
 
     public class ForgotViewModel
@@ -79,10 +76,6 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
-        [Display(Name = "Cargo")]
-        public int? CargoId { get; set; }
     }
 
     public class ResetPasswordViewModel
