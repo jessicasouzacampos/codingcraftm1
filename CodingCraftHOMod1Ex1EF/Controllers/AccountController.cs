@@ -136,8 +136,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
-        {
-            ViewBag.CargoId = new SelectList(db.Cargos, "CargoId", "Nome");
+        {            
             return View();
         }
 

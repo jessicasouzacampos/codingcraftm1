@@ -13,6 +13,7 @@ using CodingCraftHOMod1Ex1EF.Extensions;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProdutosController : Controller
     {
         // GET: Produtos

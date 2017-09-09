@@ -22,7 +22,6 @@ namespace CodingCraftHOMod1Ex1EF.Migrations
             const string name = "admin@example.com";
             const string password = "Admin@123456";
             const string roleName = "Admin";
-            const string cargoName = "Administrador";
 
             //Create Role Admin if it does not exist
             var role = roleManager.FindByName(roleName);
@@ -35,8 +34,7 @@ namespace CodingCraftHOMod1Ex1EF.Migrations
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name , Cargo = new Cargo(cargoName) };
-                user.AddClaim();
+                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }          

@@ -11,11 +11,7 @@ namespace CodingCraftHOMod1Ex1EF.Models.Acesso
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class Usuario : IdentityUser<Guid, UsuarioLogin, UsuarioGrupo, UsuarioIdentificacao>
-    {
-        [ForeignKey("Cargo")]
-        public int CargoId { get; set; }
-
-        public virtual Cargo Cargo { get; set;}
+    {       
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Usuario,Guid> manager)
         {
@@ -24,12 +20,6 @@ namespace CodingCraftHOMod1Ex1EF.Models.Acesso
             // Add custom user claims here
             return userIdentity;
         }
-
-       
-
-        public void AddClaim()
-        {
-            Claims.Add(new UsuarioIdentificacao("Cargo", Cargo.Nome));
-        }
+               
     }
 }
