@@ -274,6 +274,7 @@
     <Compile Include="Models\Acesso\UsuarioLogin.cs" />
     <Compile Include="Models\Cargo.cs" />
     <Compile Include="Models\Enum\Formato.cs" />
+    <Compile Include="Models\Enum\Genero.cs" />
     <Compile Include="Models\PesquisaSalva.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Cliente.cs" />
@@ -454,6 +455,7 @@
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\Account\_OutrosDadosRegistro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

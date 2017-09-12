@@ -52,19 +52,23 @@ namespace CodingCraftHOMod1Ex1EF
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "QafPlwqM1W0VcMOktlXHnV61R",
+               consumerSecret: "20Ufg0wunf6pQ2Qkfi0tbES2dHrHpUmt5D43Ardir7jzs7vNnB");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1950397918512133",
+               appSecret: "1771e321a0519131b3f394c60bbbf9e7");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+
+        
         }
+
+        
     }
 }

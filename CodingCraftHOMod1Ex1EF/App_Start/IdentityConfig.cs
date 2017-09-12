@@ -145,9 +145,17 @@ namespace CodingCraftHOMod1Ex1EF
         public ApplicationSignInManager(GerenciadorUsuarios userManager, IAuthenticationManager authenticationManager) : 
             base(userManager, authenticationManager) { }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(Usuario user)
+        public override async Task<ClaimsIdentity> CreateUserIdentityAsync(Usuario user)
         {
-            return user.GenerateUserIdentityAsync((GerenciadorUsuarios)UserManager);
+            ClaimsIdentity claimIdentity = await base.CreateUserIdentityAsync(user);
+
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Gerente"));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Estagiario"));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Administrativo"));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Financeiro"));
+
+            return claimIdentity;
         }
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)

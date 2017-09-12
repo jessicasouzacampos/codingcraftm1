@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CodingCraftHOMod1Ex1EF.ViewModels;
 using CodingCraftHOMod1Ex1EF.Models.Acesso;
 using System;
+using System.Security.Claims;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -35,6 +36,19 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        private GerenciadorGrupos _roleManager;
+        public GerenciadorGrupos RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<GerenciadorGrupos>();
+            }
+            private set
+            {
+                _roleManager = value;
             }
         }
 
@@ -75,7 +89,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
+                case SignInStatus.Success:                   
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -149,8 +163,21 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Usuario { UserName = model.Email, Email = model.Email };
+                var user = new Usuario { UserName = model.Email, Email = model.Email , Id = Guid.NewGuid()};
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                var roles = user.Roles.Where(o => o.UserId == user.Id);
+                foreach (var role in roles)
+                {
+                    var roleName = RoleManager.FindById(role.RoleId).Name;
+
+                    await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, roleName, ClaimValueTypes.String));
+                }
+
+                await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String));
+                await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Gender, user.Genero.ToString(), ClaimValueTypes.String));
+                await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.DateOfBirth, user.DataNascimento.ToString("dd/MM/yyyy"), ClaimValueTypes.String));
+
                 if (result.Succeeded)
                 {
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

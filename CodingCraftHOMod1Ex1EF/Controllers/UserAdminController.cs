@@ -88,7 +88,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Usuario { UserName = userViewModel.Email, Email = userViewModel.Email };
+                var user = new Usuario { UserName = userViewModel.Email, Email = userViewModel.Email, Id = Guid.NewGuid() };
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
