@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CodingCraftHOMod1Ex1EF.ViewModels
@@ -65,6 +66,10 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]       
+        [Display(Name = "Data Nascimento")]
+        public DateTime DataNascimento { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

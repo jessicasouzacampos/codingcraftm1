@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System;
+using System.Security.Claims;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
@@ -88,7 +89,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Usuario { UserName = userViewModel.Email, Email = userViewModel.Email, Id = Guid.NewGuid() };
+                var user = new Usuario { UserName = userViewModel.Email, Email = userViewModel.Email, Id = Guid.NewGuid() , DataNascimento = userViewModel.DataNascimento};
                 var adminresult = await UserManager.CreateAsync(user, userViewModel.Password);
 
                 //Add User to the selected Roles 
@@ -96,6 +97,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                 {
                     if (selectedRoles != null)
                     {
+                        await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.DateOfBirth, user.DataNascimento.ToString("dd/MM/yyyy")));
                         var result = await UserManager.AddToRolesAsync(user.Id, selectedRoles);
                         if (!result.Succeeded)
                         {

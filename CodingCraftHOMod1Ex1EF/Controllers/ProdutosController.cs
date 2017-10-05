@@ -10,10 +10,12 @@ using System;
 using PagedList;
 using Microsoft.AspNet.Identity;
 using CodingCraftHOMod1Ex1EF.Extensions;
+using CodingCraftHOMod1Ex1EF.Filters;
 
 namespace CodingCraftHOMod1Ex1EF.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
+    [IdadeMinima("DateOfBirth")]
     public class ProdutosController : Controller
     {
         // GET: Produtos

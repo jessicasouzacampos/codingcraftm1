@@ -147,16 +147,16 @@ namespace CodingCraftHOMod1Ex1EF
 
         public override async Task<ClaimsIdentity> CreateUserIdentityAsync(Usuario user)
         {
-            ClaimsIdentity claimIdentity = await base.CreateUserIdentityAsync(user);
+            ClaimsIdentity claimIdentity = await base.CreateUserIdentityAsync(user);            
 
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Administrador"));
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Gerente"));
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Estagiario"));
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Administrativo"));
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Role, "Financeiro"));
+            foreach(var role in user.Roles)
+            {
+                claimIdentity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));
+            }                       
 
             return claimIdentity;
         }
+        
 
         public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
         {
