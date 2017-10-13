@@ -30,11 +30,11 @@ namespace CodingCraftHOMod1Ex1EF.Migrations
                 role = new Grupo { Name = roleName , Id = Guid.NewGuid()};
                 var roleresult = roleManager.Create(role);
             }
-
+   
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name };
+                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name, DataNascimento = DateTime.Parse("1991-01-01") };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }          

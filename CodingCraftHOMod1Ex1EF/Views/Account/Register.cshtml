@@ -29,14 +29,15 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-   
+
+    @Html.Partial("_OutrosDadosRegistro")
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
     </div>
-
-    @Html.Partial("_OutrosDadosRegistro")
+   
 }
 
 @section Scripts {

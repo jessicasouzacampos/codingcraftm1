@@ -171,12 +171,12 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
                 {
                     var roleName = RoleManager.FindById(role.RoleId).Name;
 
-                    await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, roleName, ClaimValueTypes.String));
+                    await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Role, roleName, ClaimValueTypes.String));
                 }
 
-                await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String));
-                await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Gender, user.Genero.ToString(), ClaimValueTypes.String));
-                await _userManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.DateOfBirth, user.DataNascimento.ToString("dd/MM/yyyy"), ClaimValueTypes.String));
+                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.String));
+                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.Gender, user.Genero.ToString(), ClaimValueTypes.String));
+                await UserManager.AddClaimAsync(user.Id, new Claim(ClaimTypes.DateOfBirth, user.DataNascimento.ToString("dd/MM/yyyy"), ClaimValueTypes.String));
 
                 if (result.Succeeded)
                 {

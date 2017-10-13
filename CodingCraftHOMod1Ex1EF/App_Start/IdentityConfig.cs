@@ -124,10 +124,10 @@ namespace CodingCraftHOMod1Ex1EF
                 role = new Grupo { Name = roleName};
                 var roleresult = roleManager.Create(role);
             }
-
+            var dt = DateTime.Parse("1991-01-01");
             var user = userManager.FindByName(name);
             if (user == null) {
-                user = new Usuario { UserName = name, Email = name };
+                user = new Usuario { UserName = name, Email = name , DataNascimento = dt };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
