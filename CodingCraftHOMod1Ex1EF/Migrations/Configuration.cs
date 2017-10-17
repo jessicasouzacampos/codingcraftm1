@@ -6,6 +6,7 @@ namespace CodingCraftHOMod1Ex1EF.Migrations
     using Models;
     using System;
     using System.Data.Entity;
+    using System.Security.Claims;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
@@ -34,8 +35,11 @@ namespace CodingCraftHOMod1Ex1EF.Migrations
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name, DataNascimento = DateTime.Parse("1991-01-01") };
+                user = new Usuario { Id = Guid.NewGuid(), UserName = name, Email = name, DataNascimento = DateTime.Parse("1991-01-01") };                
                 var result = userManager.Create(user, password);
+
+                userManager.AddClaim(user.Id, new Claim(ClaimTypes.DateOfBirth, user.DataNascimento.ToString("dd/MM/yyyy")));
+
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }          
 

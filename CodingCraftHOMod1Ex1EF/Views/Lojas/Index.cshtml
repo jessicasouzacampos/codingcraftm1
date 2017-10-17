@@ -18,9 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.NomeLoja)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName("Quantidade")
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -30,9 +30,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LojaProdutos.Select(p => p.Produto).Count())
-            </td>
+            @*<td>
+              @Html.DisplayFor(modelItem => item.LojaProdutos.Select(p => p.Produto).Count())
+            </td>*@
             <td>                
                 @Html.ActionLink("Editar", "Edit", new { id = item.LojaId }) |          
                 @Html.ActionLink("Detalhes", "Details", new { id = item.LojaId }) |

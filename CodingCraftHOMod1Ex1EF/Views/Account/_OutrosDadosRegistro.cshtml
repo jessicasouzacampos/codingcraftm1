@@ -1,23 +1,17 @@
 ﻿@model CodingCraftHOMod1Ex1EF.Models.Acesso.Usuario
-
-@using (Html.BeginForm()) 
-{                            
-    <div class="form-group">
-        @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-4">
-            @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-            @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
-        </div>
+                           
+<div class="form-group">
+    @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-4">
+        @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+        @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Genero, "Gênero", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-4">
-            @Html.EnumDropDownListFor(model => model.Genero, "Selecione o gênero", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+<div class="form-group">
+    @Html.LabelFor(model => model.Genero, "Gênero", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-4">
+        @Html.EnumDropDownListFor(model => model.Genero, "Selecione o gênero", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+    </div>
+</div>
+

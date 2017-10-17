@@ -163,7 +163,7 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Usuario { UserName = model.Email, Email = model.Email , Id = Guid.NewGuid()};
+                var user = new Usuario { UserName = model.Email, Email = model.Email , Id = Guid.NewGuid(), DataNascimento = model.DataNascimento};
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 var roles = user.Roles.Where(o => o.UserId == user.Id);
