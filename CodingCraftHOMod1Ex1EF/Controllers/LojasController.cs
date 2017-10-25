@@ -38,21 +38,21 @@ namespace CodingCraftHOMod1Ex1EF.Controllers
 
         public ActionResult SalvarPesquisa(ProdutosPorLojaViewModel viewModel)
         {
-            if (viewModel.Resultados.Count() > 0)
+            if (viewModel.Resultados != null && viewModel.Resultados.Count() > 0)
             {
                 string filePath = string.Empty;
 
-                if (viewModel.FormatoEscolhido == Models.Enum.Formato.Excel)
+                if (viewModel.SalvarPesquisa.FormatoEscolhido == Models.Enum.Formato.Excel)
                 {
                     filePath = ArquivosHelperExtensions.SalvarExcel("ProdutosPorLoja", viewModel.Resultados.ToList());
                     Response.ContentType = "application/vnd.ms-excel";
                 }
-                else if (viewModel.FormatoEscolhido == Models.Enum.Formato.JSON)
+                else if (viewModel.SalvarPesquisa.FormatoEscolhido == Models.Enum.Formato.JSON)
                 {
                     filePath = ArquivosHelperExtensions.SalvarJson(viewModel.Resultados.ToList(), "ProdutosPorLoja");
                     Response.ContentType = "application/json";
                 }
-                else if (viewModel.FormatoEscolhido == Models.Enum.Formato.XML)
+                else if (viewModel.SalvarPesquisa.FormatoEscolhido == Models.Enum.Formato.XML)
                 {
                     filePath = ArquivosHelperExtensions.SalvarXML(viewModel.Resultados.ToList(), "ProdutosViewModel", "ProdutosPorLoja");
                     Response.ContentType = "application/xml";

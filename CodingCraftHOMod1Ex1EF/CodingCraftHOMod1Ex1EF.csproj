@@ -308,6 +308,7 @@
     <Compile Include="ViewModels\EntidadeViewModel.cs" />
     <Compile Include="ViewModels\ProdutoPesquisaViewModel.cs" />
     <Compile Include="ViewModels\ProdutosPorLojaViewModel.cs" />
+    <Compile Include="ViewModels\SalvarPesquisaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -457,6 +458,7 @@
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\Account\_OutrosDadosRegistro.cshtml" />
+    <Content Include="Views\Lojas\_SalvarPesquisa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

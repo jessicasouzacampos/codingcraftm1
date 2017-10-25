@@ -12,12 +12,10 @@ namespace CodingCraftHOMod1Ex1EF.ViewModels
         public string NomeLoja { get; set; }
 
         /* [Required(ErrorMessage = "É obrigatório informar o local onde deseja salvar o arquivo")]
-        public string LocalArquivo { get; set; } */
-
-        [Required(ErrorMessage ="É obrigatório selecionar o formato")]
-        public Formato FormatoEscolhido { get; set; }
+        public string LocalArquivo { get; set; } */      
 
         // public IEnumerable<ProdutosViewModel> Resultados { get; set; }
+        public SalvarPesquisaViewModel SalvarPesquisa { get; set; }
         public IEnumerable<Loja> Resultados { get; set; }
     }
 
